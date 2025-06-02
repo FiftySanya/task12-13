@@ -37,7 +37,10 @@ static void generic_signal_handler(int signum, siginfo_t *siginfo, void *context
     PipeMessage msg;
     msg.signal_num = signum;
     msg.sender_pid = siginfo->si_pid;
-    ssize_t written_bytes = write(self_pipe_fd[1], &msg, sizeof(PipeMessage));
+    ssize_t written_bytes = write(self_pipe_fd[1], &msg, sizeof(PipeMessage)); // Запис у pipe
+    if (written_bytes != sizeof(PipeMessage)) { // Перевірка результату запису
+        // Коментар-заглушка
+    }
 }
 
 // Обробник SIGINT
